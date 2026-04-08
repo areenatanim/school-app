@@ -407,6 +407,10 @@
             <div class="search-box animate">
                 <h2 style="margin-bottom: 1.5rem;">Check Your Results</h2>
                 <input type="text" class="search-input" placeholder="Enter Roll Number or Name..." onkeyup="filterResults(this.value)">
+                <br>
+                <br>
+                <button class="cta-button" id="result-btn">Our Result</button>
+                <br>
                 <p style="margin-top: 1rem; opacity: 0.7;">Select Year: <select><option>2024</option><option>2023</option></select></p>
             </div>
 
@@ -658,6 +662,11 @@
         }
 
         // Results Filter
+        // result btn start
+        document.getElementById("result-btn").addEventListener("click",function(){
+                window.location.assign("/result.html");
+        })
+        // result btn end
         function filterResults(query) {
             const rows = document.querySelectorAll('#resultsTable tr');
             rows.forEach(row => {

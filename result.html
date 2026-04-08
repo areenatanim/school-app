@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Result - শিক্ষার্থী রেজাল্ট ম্যানেজমেন্ট</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <link rel="stylesheet" href="styles/school.css">
+</head>
+<body>
+    <div class="app" id="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-school"></i>
+                    <span>School Result</span>
+                    <span class="tagline">শিক্ষার্থী রেজাল্ট সিস্টেম</span>
+                </div>
+                <div class="header-actions">
+                    <select id="classSelector" class="class-select">
+                        <option>ক্লাস নির্বাচন করুন</option>
+                        <option value="1">ক্লাস ১</option>
+                        <option value="5">ক্লাস ৫</option>
+                        <option value="8">ক্লাস ৮</option>
+                        <option value="10">ক্লাস ১০</option>
+                        <option value="12">ক্লাস ১২ (এইচএসসি)</option>
+                    </select>
+                    <button class="btn-icon" id="themeToggle" title="থিম পরিবর্তন">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="btn-icon" id="printBtn" title="প্রিন্ট">
+                        <i class="fas fa-print"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Student Info -->
+            <section class="student-info">
+                <div class="student-card">
+                    <div class="student-avatar">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="student-details">
+                        <input type="text" id="studentName" placeholder="শিক্ষার্থীর নাম" value="রাহুল খান">
+                        <input type="text" id="studentRoll" placeholder="রোল নম্বর" value="১২৩৪৫">
+                        <input type="text" id="studentReg" placeholder="রেজিস্ট্রেশন নং" value="২০২৩-০১-১২৩৪৫">
+                        <div class="student-meta">
+                            <span id="examType">বার্ষিক পরীক্ষা ২০২৪</span>
+                            <span id="totalMarks">মোট নম্বর: <strong>1000</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Subjects Section -->
+            <section class="subjects-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-book"></i> বিষয়ভিত্তিক ফলাফল</h2>
+                    <button class="btn-primary" id="addSubjectBtn">
+                        <i class="fas fa-plus"></i> নতুন বিষয়
+                    </button>
+                </div>
+                <div class="subjects-table" id="subjectsTable">
+                    <!-- Subjects will be added here -->
+                </div>
+            </section>
+
+            <!-- Results Summary -->
+            <section class="results-section">
+                <div class="results-grid">
+                    <div class="result-card highlight">
+                        <div class="result-value" id="percentage">0%</div>
+                        <div class="result-label">পার্সেন্টেজ</div>
+                        <div class="result-grade" id="gradeLetter">F</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value" id="totalObtained">0</div>
+                        <div class="result-label">পাওয়া নম্বর</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value" id="totalSubjects">0/0</div>
+                        <div class="result-label">পাস/ফেল</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-value" id="position">-</div>
+                        <div class="result-label">পজিশন</div>
+                    </div>
+                </div>
+                <div class="results-actions">
+                    <button class="btn-success" id="exportPdf">
+                        <i class="fas fa-file-pdf"></i> রেজাল্ট শিট PDF
+                    </button>
+                    <button class="btn-warning" id="resetAll">
+                        <i class="fas fa-trash"></i> সব মুছে ফেলুন
+                    </button>
+                    <button class="btn-info" id="predictBtn">
+                        <i class="fas fa-calculator"></i> প্রেডিকশন
+                    </button>
+                </div>
+            </section>
+
+            <!-- Grade Scale -->
+            <section class="grade-scale">
+                <h3><i class="fas fa-chart-bar"></i> গ্রেড স্কেল ও ফলাফল</h3>
+                <div class="grade-table">
+                    <div class="grade-row header">
+                        <span>গ্রেড</span>
+                        <span>পার্সেন্টেজ</span>
+                        <span>বিবরণ</span>
+                    </div>
+                    <!-- Grade rows populated by JS -->
+                </div>
+            </section>
+
+            <!-- Position Table -->
+            <section class="position-table" id="positionTableSection" style="display: none;">
+                <h3><i class="fas fa-trophy"></i> ক্লাস পজিশন</h3>
+                <div class="position-list">
+                    <!-- Position list populated by JS -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Prediction Modal -->
+        <div class="modal" id="predictModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>প্রয়োজনীয় নম্বর ক্যালকুলেটর</h3>
+                    <button class="btn-close" id="closePredict">&times;</button>
+                </div>
+                <div class="predict-form">
+                    <label>টার্গেট পার্সেন্টেজ: <input type="number" id="targetPercent" min="0" max="100" value="80"></label>
+                    <label>বাকি বিষয় সংখ্যা: <input type="number" id="remainingSubjects" min="1" max="10" value="2"></label>
+                    <button class="btn-primary" id="calculatePredict">ক্যালকুলেট করুন</button>
+                    <div id="predictResult" class="predict-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="js/school.js"></script>
+</body>
+</html>
