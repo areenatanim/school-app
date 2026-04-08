@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegance Academy - Premier Education</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Space+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #1A1A1A;
+            --bg-secondary: #0F4C3A;
+            --accent-gold: #D4AF37;
+            --text-light: #F5F5F5;
+            --text-muted: #B0B0B0;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --shadow: 0 25px 50px rgba(0,0,0,0.5);
+            --shadow-hover: 0 35px 70px rgba(0,0,0,0.7);
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--accent-gold), #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-family: 'Space Mono', monospace;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(15, 76, 58, 0.2) 0%, transparent 50%),
+                        var(--bg-primary);
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--accent-gold), #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.3)); }
+            to { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.6)); }
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(45deg, var(--accent-gold), #FFD700);
+            color: var(--bg-primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Space Mono', monospace;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-gold);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--accent-gold), #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        /* Results Page */
+        .results-container {
+            max-width: 800px;
+            margin: 5rem auto;
+            padding: 0 2rem;
+        }
+
+        .search-box {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .results-table {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        th {
+            background: rgba(212, 175, 55, 0.1);
+            font-family: 'Space Mono', monospace;
+            font-weight: 500;
+        }
+
+        .grade-a { color: var(--accent-gold); font-weight: bold; }
+        .grade-b { color: #FFD700; }
+
+        /* Classes Page */
+        .classes-grid {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .class-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .class-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--accent-gold);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .class-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .class-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--accent-gold), #FFD700);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* About Page */
+        .about-content {
+            max-width: 1000px;
+            margin: 5rem auto;
+            padding: 0 2rem;
+        }
+
+        .timeline {
+            position: relative;
+            margin: 3rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-gold), transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* Page Transitions */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Elegance Academy</div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" onclick="showPage('results')">Results</a></li>
+                <li><a href="#" onclick="showPage('classes')">Classes</a></li>
+                <li><a href="#" onclick="showPage('about')">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Excellence Since 1985</h1>
+                <p>Where tradition meets innovation. Nurturing minds for a brighter tomorrow with 99% academic excellence.</p>
+                <a href="#stats" class="cta-button">Discover Excellence</a>
+            </div>
+        </div>
+        
+        <section id="stats" class="stats">
+            <div class="stat-card animate">
+                <span class="stat-number" data-target="5000">0</span>
+                <h3>Alumni Network</h3>
+            </div>
+            <div class="stat-card animate">
+                <span class="stat-number" data-target="99">0</span>
+                <h3>% Pass Rate</h3>
+            </div>
+            <div class="stat-card animate">
+                <span class="stat-number" data-target="150">0</span>
+                <h3>Faculty Members</h3>
+            </div>
+            <div class="stat-card animate">
+                <span class="stat-number" data-target="20">0</span>
+                <h3>Years of Legacy</h3>
+            </div>
+        </section>
+    </section>
+
+    <!-- Results Page -->
+    <section id="results" class="page">
+        <div class="results-container">
+            <div class="search-box animate">
+                <h2 style="margin-bottom: 1.5rem;">Check Your Results</h2>
+                <input type="text" class="search-input" placeholder="Enter Roll Number or Name..." onkeyup="filterResults(this.value)">
+                <p style="margin-top: 1rem; opacity: 0.7;">Select Year: <select><option>2024</option><option>2023</option></select></p>
+            </div>
+
+            <div class="results-table animate">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Roll No</th>
+                            <th>Student Name</th>
+                            <th>Maths</th>
+                            <th>Science</th>
+                            <th>English</th>
+                            <th>Percentage</th>
+                            <th>Rank</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsTable">
+                        <tr>
+                            <td>001</td>
+                            <td>Aarav Sharma</td>
+                            <td><span class="grade-a">98</span></td>
+                            <td><span class="grade-a">96</span></td>
+                            <td><span class="grade-a">95</span></td>
+                            <td><span class="grade-a">96.3%</span></td>
+                            <td>1st</td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>Priya Patel</td>
+                            <td><span class="grade-a">95</span></td>
+                            <td><span class="grade-b">92</span></td>
+                            <td><span class="grade-a">94</span></td>
+                            <td>93.7%</td>
+                            <td>2nd</td>
+                        </tr>
+                        <tr>
+                            <td>003</td>
+                            <td>Rohan Singh</td>
+                            <td>88</td>
+                            <td>90</td>
+                            <td>89</td>
+                            <td>89%</td>
+                            <td>3rd</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="cta-button" onclick="downloadPDF()">Download PDF</button>
+                <button class="cta-button" style="background: transparent; margin-left: 1rem;" onclick="printResults()">Print</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Classes Page -->
+    <section id="classes" class="page">
+        <div class="classes-grid">
+            <div class="class-card animate">
+                <div class="class-header">
+                    <div class="class-icon"><i class="fas fa-calculator"></i></div>
+                    <div>
+                        <h3>Class 10th (Science)</h3>
+                        <p>Mr. Rajesh Kumar</p>
+                    </div>
+                </div>
+                <ul style="list-style: none; padding: 0;">
+                    <li><i class="fas fa-check" style="color: var(--accent-gold); margin-right: 0.5rem;"></i>Physics, Chemistry, Maths</li>
+                    <li><i class="fas fa-check" style="color: var(--accent-gold); margin-right: 0.5rem;"></i>Biology, English, Hindi</li>
+                </ul>
+                <a href="#" class="cta-button" style="margin-top: 1.5rem; display: block; text-align: center;">View Timetable</a>
+            </div>
+
+            <div class="class-card animate">
+                <div class="class-header">
+                    <div class="class-icon"><i class="fas fa-laptop-code"></i></div>
+                    <div>
+                        <h3>Class 11th (Commerce)</h3>
+                        <p>Ms. Anjali Mehta</p>
+                    </div>
+                </div>
+                <ul style="list-style: none; padding: 0;">
+                    <li><i class="fas fa-check" style="color: var(--accent-gold); margin-right: 0.5rem;"></i>Accountancy, Economics</li>
+                    <li><i class="fas fa-check" style="color: var(--accent-gold); margin-right: 0.5rem;"></i>Business Studies, IT</li>
+                </ul>
+                <a href="#" class="cta-button" style="margin-top: 1.5rem; display: block; text-align: center;">Enroll Now</a>
+            </div>
+
+            <div class="class-card animate">
+                <div class="class-header">
+                    <div class="class-icon"><i class="fas fa-paint-brush"></i></div>
+                    <div>
+                        <h3>Class 12th (Arts)</h3>
+                        <p>Dr. Priya Rao</p>
+                    </div>
+                </div>
+                <ul style="list-style: none; padding: 0;">
+                    <li><i class="fas fa-check" style="color: var(--accent-gold); margin-right: 0.5rem;"></i>History, Political Science</li>
+                    <li><i class="fas fa-check" style="color: var(--accent-gold); margin-right: 0.5rem;"></i>Psychology, Fine Arts</li>
+                </ul>
+                <a href="#" class="cta-button" style="margin-top: 1.5rem; display: block; text-align: center;">Syllabus PDF</a>
+            </div>
+        </div>
+    </section>
+                <div class="class-card animate">
+                <div class="class-header">
+                    <div class="class-icon"><i class="fas fa-globe"></i></div>
+                    <div>
+                        <h3>Grade 9 (Foundation)</h3>
+                        <p>Mr. Vikram Desai</p>
+                    </div>
+                </div>
+                <ul style="list-style: none; padding: 0;">
+                    <li><i class="fas fa-check" style="color: var(--accent-gold); margin-right: 0.5rem;"></i>STEM Foundation</li>
+                    <li><i class="fas fa-check" style="color: var(--accent-gold); margin-right: 0.5rem;"></i>Language Skills</li>
+                </ul>
+                <a href="#" class="cta-button" style="margin-top: 1.5rem; display: block; text-align: center;">Parent Portal</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Page -->
+    <section id="about" class="page">
+        <div class="about-content">
+            <div class="animate" style="text-align: center; margin-bottom: 4rem;">
+                <h2 style="font-size: 3rem; margin-bottom: 1rem;">Our Legacy</h2>
+                <p style="font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto;">Founded in 1985, Elegance Academy has been shaping future leaders for nearly four decades.</p>
+            </div>
+
+            <div class="timeline animate">
+                <div class="timeline-item" style="display: flex; align-items: center; margin-bottom: 4rem;">
+                    <div style="flex: 1; text-align: right; padding-right: 2rem;">
+                        <h3 style="color: var(--accent-gold);">1985</h3>
+                        <p>Academy Founded</p>
+                    </div>
+                    <div style="width: 20px; height: 20px; background: var(--accent-gold); border-radius: 50%; margin: 0 2rem;"></div>
+                    <div style="flex: 1;">
+                        <p>Established with 50 students and 10 faculty members in the heart of the city.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" style="display: flex; flex-direction: row-reverse; align-items: center; margin-bottom: 4rem;">
+                    <div style="flex: 1; text-align: left; padding-left: 2rem;">
+                        <h3 style="color: var(--accent-gold);">2000</h3>
+                        <p>100% Results</p>
+                    </div>
+                    <div style="width: 20px; height: 20px; background: var(--accent-gold); border-radius: 50%; margin: 0 2rem;"></div>
+                    <div style="flex: 1;">
+                        <p>First year achieving perfect board exam results. Expansion to 500+ students.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" style="display: flex; align-items: center;">
+                    <div style="flex: 1; text-align: right; padding-right: 2rem;">
+                        <h3 style="color: var(--accent-gold);">2024</h3>
+                        <p>Modern Campus</p>
+                    </div>
+                    <div style="width: 20px; height: 20px; background: var(--accent-gold); border-radius: 50%; margin: 0 2rem;"></div>
+                    <div style="flex: 1;">
+                        <p>New 10-acre campus with smart classrooms and STEM labs inaugurated.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem;">
+                <div class="stat-card animate" style="text-align: center;">
+                    <i class="fas fa-users" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1rem;"></i>
+                    <h3>World-Class Faculty</h3>
+                    <p>150+ PhD qualified teachers with 15+ years experience</p>
+                </div>
+                <div class="stat-card animate" style="text-align: center;">
+                    <i class="fas fa-flask" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1rem;"></i>
+                    <h3>Advanced Labs</h3>
+                    <p>State-of-the-art Physics, Chemistry, Biology & Computer labs</p>
+                </div>
+                <div class="stat-card animate" style="text-align: center;">
+                    <i class="fas fa-trophy" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1rem;"></i>
+                    <h3>Champions Factory</h3>
+                    <p>500+ National & International awards in academics & sports</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 4rem;">
+                <h3 style="margin-bottom: 1rem;">Ready to Join the Legacy?</h3>
+                <a href="#" class="cta-button" onclick="alert('Admission form coming soon!')">Apply Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--bg-secondary); padding: 3rem 2rem 1rem; margin-top: 5rem; text-align: center;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                <div>
+                    <div class="logo" style="font-size: 1.5rem; margin-bottom: 1rem;">Elegance Academy</div>
+                    <p style="opacity: 0.8;">Shaping future leaders since 1985 with unwavering commitment to excellence.</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--accent-gold); margin-bottom: 1rem;">Quick Links</h4>
+                    <ul style="list-style: none;">
+                        <li><a href="#" style="color: var(--text-muted); text-decoration: none;">Admissions</a></li>
+                        <li><a href="#" style="color: var(--text-muted); text-decoration: none;">Fee Structure</a></li>
+                        <li><a href="#" style="color: var(--text-muted); text-decoration: none;">Scholarships</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--accent-gold); margin-bottom: 1rem;">Contact</h4>
+                    <p style="opacity: 0.8;"><i class="fas fa-phone" style="margin-right: 0.5rem;"></i>+91 98765 43210</p>
+                    <p style="opacity: 0.8;"><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i>info@eleganceacademy.edu</p>
+                </div>
+            </div>
+            <div style="border-top: 1px solid var(--glass-border); padding-top: 2rem; opacity: 0.7;">
+                <p>&copy; 2024 Elegance Academy. All rights reserved. | Designed with ❤️ for educational excellence</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Navbar scroll effect
+            document.querySelector('.navbar').style.background = 'rgba(26, 26, 26, 0.95)';
+        }
+
+        // Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const increment = target / 100;
+                let current = 0;
+                
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.floor(current) + (target > 100 ? '' : '%');
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target + (target > 100 ? '' : '%');
+                    }
+                };
+                updateCounter();
+            });
+        }
+
+        // Results Filter
+        function filterResults(query) {
+            const rows = document.querySelectorAll('#resultsTable tr');
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(query.toLowerCase()) ? '' : 'none';
+            });
+        }
+
+        // Utility Functions
+        function downloadPDF() {
+            alert('PDF Download feature - Coming Soon!\n(Use browser print → Save as PDF)');
+        }
+
+        function printResults() {
+            window.print();
+        }
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animate elements
+        document.querySelectorAll('.animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initialize counters when stats section is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statsObserver.observe(document.querySelector('.stats'));
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(26, 26, 26, 0.95)';
+                navbar.style.backdropFilter = 'blur(30px)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.05)';
+                navbar.style.backdropFilter = 'blur(20px)';
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // PWA Ready - Add to home screen prompt (optional)
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            deferredPrompt = e;
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'p': e.preventDefault(); printResults(); break;
+                }
+            }
+        });
+
+        console.log('🌟 Elegance Academy Website Loaded Successfully!');
+        console.log('✨ Features: Responsive, Animated, Searchable Results, PWA Ready');
+    </script>
+</body>
+</html>
